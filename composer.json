@@ -16,6 +16,7 @@
         "laravel/sail": "^1.18",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^7.0",
+        "pestphp/pest": "^2.18",
         "phpunit/phpunit": "^10.1",
         "spatie/laravel-ignition": "^2.0"
     },
@@ -44,6 +45,9 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
+        ],
+        "test": [
+            "docker container exec -it $(docker ps -q -f name=indebook_php82) sh -c \"php vendor/bin/pest\" -d"
         ]
     },
     "extra": {
