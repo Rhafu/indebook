@@ -1,0 +1,19 @@
+{
+    "name": "indebook/indebook",
+    "type": "project",
+    "require": {
+        "php": "^8.1"
+    },
+    "require-dev": {
+        "pestphp/pest": "^1.23"
+    },
+    "config": {
+        "allow-plugins": true
+    },
+    "authors": [
+        {
+            "name": "Ronei Kunkel",
+            "email": "ronei.kunkel@gmail.com"
+        }
+    ]
+}

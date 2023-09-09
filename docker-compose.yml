@@ -1,0 +1,51 @@
+version: '3.7'
+
+services:
+
+  indebook_nginx:
+    container_name: "indebook_nginx"
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: ./.docker/nginx/Dockerfile
+    ports:
+      - 80:80
+    networks:
+      - internal
+    volumes:
+      - .:/indebook/
+      - ./.docker/logs/nginx:/var/log/nginx/
+
+  indebook_mariadb:
+    container_name: "indebook_mariadb"
+    image: mariadb:11.0.2
+    volumes:
+      - ./.docker/database/${DB_DATABASE}:/var/lib/mysql/${DB_DATABASE}
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MARIADB_ROOT_PASSWORD: ${DB_PASSWORD}
+      MARIADB_PASSWORD: ${DB_PASSWORD}
+      MARIADB_USER: ${DB_USERNAME}
+    networks:
+      - internal
+
+  indebook_php82:
+    container_name: "indebook_php82"
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: "./.docker/php/Dockerfile"
+    volumes:
+      - .:/indebook/
+    networks:
+      - internal
+    depends_on:
+      - indebook_nginx
+      - indebook_mariadb
+
+networks:
+  internal:
+    driver: bridge
