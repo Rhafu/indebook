@@ -48,8 +48,8 @@ WORKDIR /indebook
 
 RUN composer update --working-dir="/indebook" && composer dump-autoload --working-dir="/indebook"
 
-# RUN chmod -R 777 storage
-# RUN chmod -R 777 bootstrap/cache
+RUN chmod -R 777 storage
+RUN chmod -R 777 bootstrap/cache
 
 EXPOSE 9000
 EXPOSE 80
