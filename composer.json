@@ -46,9 +46,8 @@
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi"
         ],
-        "test": [
-            "docker container exec -it $(docker ps -q -f name=indebook_php82) sh -c \"php vendor/bin/pest\" -d"
-        ]
+        "test": "docker container exec -it $(docker ps -q -f name=indebook_php82) sh -c \"php vendor/bin/pest\" -d",
+        "bash": "docker container exec -it $(docker ps -q -f name=indebook_php82) bash"
     },
     "extra": {
         "laravel": {
