@@ -45,6 +45,7 @@ services:
     depends_on:
       - indebook_nginx
       - indebook_mariadb
+    command: sh -c "composer install && php-fpm"
 
 networks:
   internal:
