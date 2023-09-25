@@ -37,7 +37,7 @@ services:
     restart: unless-stopped
     build:
       context: .
-      dockerfile: "./.docker/php/Dockerfile.dev"
+      dockerfile: "./.docker/php/Dockerfile"
     volumes:
       - .:/indebook/
     networks:
