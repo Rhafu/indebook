@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Blog\Domain;
+namespace Blog\Domain\Entity;
 
-use Blog\Domain\Author;
+use Blog\Domain\Entity\Author;
 
 class Post
 {
   public function __construct(
     private int $id,
     private string $title,
-    private string $body,
+    private string $content,
     private string $creationDate,
     private Author $author
   ) {
@@ -27,14 +27,14 @@ class Post
     return $this->title;
   }
 
-  public function body(): string
+  public function content(): string
   {
-    return $this->body;
+    return $this->content;
   }
 
   public function creationDate(): string
   {
-    return $this->body;
+    return $this->creationDate;
   }
 
   public function author(): Author

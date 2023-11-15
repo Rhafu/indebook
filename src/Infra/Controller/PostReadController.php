@@ -3,8 +3,8 @@
 namespace Blog\Infra\Controller;
 
 use Blog\Application\PostRead;
+use Blog\Infra\Presenter\ApiOutputFactory;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 final class PostReadController
 {
@@ -14,8 +14,10 @@ final class PostReadController
 
   public function __invoke(int $postId) : JsonResponse
   {
-    $output = $this->postRead->execute($postId);
+    $post = $this->postRead->execute($postId);
 
-    return new JsonResponse(json_encode($output), 200);
+    $output = ApiOutputFactory::postReadOutput($post);
+
+    return new JsonResponse($output, 200);
   }
 }
