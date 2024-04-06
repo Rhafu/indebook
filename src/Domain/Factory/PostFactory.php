@@ -18,12 +18,14 @@ final class PostFactory
       $data->authorPostsLink
     );
 
-    return new Post(
-      $data->postId,
+    $post = new Post(
       $data->postTitle,
       $data->postContent,
-      $data->postCreationDate,
       $author
     );
+    $post->setId($data->postId);
+    $post->setCreationDate($data->postCreationDate);
+
+    return $post;
   }
 }

@@ -17,6 +17,31 @@ final class PostPDORepository implements PostRepositoryInterface
   ) {
     $this->connection = $pdo->connection();
   }
+
+  public function insert(Post $post): Post 
+  {
+    $postSql = '
+    INSERT INTO post 
+    (title, content, author_id)
+    VALUES (:title, :content, :author_id)
+    ';
+
+    $stmt = $this->connection->prepare($postSql);
+
+    $stmt->execute([
+      ':title' => $post->title(),
+      ':content' => $post->content(),
+      ':author_id' => $post->author()->id()
+    ]);
+
+    $post->setId($this->connection->lastInsertId());
+    /**
+     * TODO: consultar post pelo ID para recuperar a data de criação.
+     */
+    return $post;
+  }
+
+  // $pdo->lastInsertId();
   
   public function findById(int $id): ?Post
   {

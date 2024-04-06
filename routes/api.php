@@ -1,6 +1,8 @@
 <?php
 
+use Blog\Infra\Controller\PostCreateController;
 use Blog\Infra\Controller\PostReadController;
+use Blog\Infra\Middleware\PostReadMiddlewareValidator;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,4 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('post/{id}', PostReadController::class);
+Route::get('post/{id}', PostReadController::class)
+    ->middleware([PostReadMiddlewareValidator::class]);
+
+Route::post('post', PostCreateController::class);

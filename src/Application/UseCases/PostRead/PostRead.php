@@ -2,7 +2,7 @@
 
 declare(strict_types= 1);
 
-namespace Blog\Application;
+namespace Blog\Application\UseCases\PostRead;
 
 use Blog\Domain\Entity\Post;
 use Blog\Infra\Repository\PostPDORepository;
@@ -13,10 +13,10 @@ class PostRead{
   ){
   }
 
-  public function execute(int $postId): Post
+  public function execute(PostReadInput $input): PostReadOutput
   {
-    $post = $this->postRepository->findById($postId);
+    $post = $this->postRepository->findById($input->postId);
 
-    return $post;
+    return new PostReadOutput($post);
   }
 }

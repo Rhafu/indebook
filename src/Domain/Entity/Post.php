@@ -8,13 +8,26 @@ use Blog\Domain\Entity\Author;
 
 class Post
 {
+  private int $id;
+
+  private \DateTimeInterface $creationDate;
+
   public function __construct(
-    private int $id,
     private string $title,
     private string $content,
-    private string $creationDate,
     private Author $author
   ) {
+  }
+
+  public function setId(int $id): void
+  {
+    $this->id = $id;
+  }
+
+  public function setCreationDate(string $creationDate): void
+  {
+    $dateTimeCreationDate = new \DateTime($creationDate);
+    $this->creationDate = $dateTimeCreationDate;
   }
 
   public function id(): int
@@ -32,7 +45,7 @@ class Post
     return $this->content;
   }
 
-  public function creationDate(): string
+  public function creationDate(): \DateTimeInterface
   {
     return $this->creationDate;
   }
